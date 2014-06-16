@@ -1,0 +1,15 @@
+﻿html {
+    background-color: #EAEEFA;
+    font-family: Calibri, Arial, sans-serif;
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+nav {
+    background-color: #1d1d1d;
+    line-height: 6rem;
+    font-size: 1.7rem;
+}
