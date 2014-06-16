@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="about.html" />
     <Content Include="images\speakers\april-meyer.jpg" />
     <Content Include="images\speakers\david-alexander.jpg" />
     <Content Include="images\speakers\mark-hanson.jpg" />
