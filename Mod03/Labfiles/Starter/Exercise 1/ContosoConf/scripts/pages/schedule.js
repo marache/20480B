@@ -83,12 +83,15 @@
 
 
 // TODO: Task 2 - Get the "schedule" list element from the document
-// var list = ... ;
+var list = document.getElementById("schedule");
 
 function createSessionElement(session) {
     // TODO: Task 3 - Create a <li> element for the session.
     //       Add the session title as the <li> text content
     //       Return the <li> element
+    var element = document.createElement("li");
+    element.textContent = session.title;
+    return element;
 };
 
 function clearList() {
@@ -100,6 +103,9 @@ function clearList() {
 function displaySchedule() {
     clearList();
     
+    schedule.forEach(function (session) {
+        list.appendChild(createSessionElement(session));
+    });
     // TODO: Task 4 - Loop through the schedule array
     //       Create session elements
     //       Append the elements to the list   
