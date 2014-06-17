@@ -1,4 +1,5 @@
-﻿var schedule = [
+﻿/// <reference path="../jquery-2.1.1.js" />
+var schedule = [
     {
         "id": "session-1",
         "title": "Registration",
@@ -83,9 +84,9 @@
 
 
 // TODO: Task 2 - Get the "schedule" list element from the document
-var list = document.getElementById("schedule");
-var track1Checkbox = document.getElementById("show-track-1");
-var track2Checkbox = document.getElementById("show-track-2");
+var list = $("#schedule");
+var track1Checkbox = $("#show-track-1");
+var track2Checkbox = $("#show-track-2");
 
 
 function createSessionElement(session) {
@@ -98,9 +99,7 @@ function createSessionElement(session) {
 };
 
 function clearList() {
-    while (list.firstChild) {
-        list.removeChild(list.firstChild);
-    }
+    list.empty();
 }
 
 function displaySchedule() {
@@ -111,19 +110,19 @@ function displaySchedule() {
     //       Append the elements to the list   
     for (var i = 0; i < schedule.length; i++) {
         var session = schedule[i];
-        if ((track1Checkbox.checked && session.tracks.indexOf(1) != -1) ||
-            (track2Checkbox.checked && session.tracks.indexOf(2) != -1))
+        if ((track1Checkbox.is(':checked') && session.tracks.indexOf(1) != -1) ||
+            (track2Checkbox.is(':checked') && session.tracks.indexOf(2) != -1))
         {
             var li = createSessionElement(schedule[i]);
-            list.appendChild(li);
+            list.append(li);
         }
     }
 }
 
 displaySchedule();
 
-track1Checkbox.addEventListener("change", displaySchedule, false);
-track2Checkbox.addEventListener("change", displaySchedule, false);
+track1Checkbox.change(displaySchedule);
+track2Checkbox.change(displaySchedule);
 
 // SIG // Begin signature block
 // SIG // MIIaVgYJKoZIhvcNAQcCoIIaRzCCGkMCAQExCzAJBgUr
