@@ -9,6 +9,34 @@ var track2CheckBox = document.getElementById("show-track-2");
 //       Save the array into the schedule variable
 //       Then call displaySchedule()
 
+function downloadSchedule() {
+    var request = new XMLHttpRequest;
+    request.open("GET", "/schedule/list");
+    request.onreadystatechange = function () {
+        if (request.readyState == 4) {
+            try {
+                response = JSON.parse(request.responseText);
+                if (request.status === 200) {
+                    schedule = response.schedule;
+                    displaySchedule();
+                }
+                else {
+
+                    alert("Error " + request.status + " : " + request.statusText);
+                }
+            }
+            catch(exception) {
+                alert("Error invalid JSON in response : " + exception.message);
+            }
+
+        } else {
+
+        }
+    };
+
+    request.send();
+};
+
 function createSessionElement(session) {
     var li = document.createElement("li");
 
@@ -69,9 +97,11 @@ function handleListClick(event) {
     }
 }
 
-track1CheckBox.addEventListener("click", displaySchedule, false);
-track2CheckBox.addEventListener("click", displaySchedule, false);
+track1CheckBox.addEventListener("change", displaySchedule, false);
+track2CheckBox.addEventListener("change", displaySchedule, false);
 list.addEventListener("click", handleListClick, false);
+
+downloadSchedule();
 
 // SIG // Begin signature block
 // SIG // MIIaVgYJKoZIhvcNAQcCoIIaRzCCGkMCAQExCzAJBgUr
