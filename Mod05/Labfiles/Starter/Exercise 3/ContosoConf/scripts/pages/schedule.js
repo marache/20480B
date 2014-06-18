@@ -1,27 +1,19 @@
-﻿var schedule = [];
+﻿/// <reference path="../jquery.min.js" />
+var schedule = [];
 var list = document.getElementById("schedule");
 var track1CheckBox = document.getElementById("show-track-1");
 var track2CheckBox = document.getElementById("show-track-2");
 
 function downloadSchedule() {
-    var request = new XMLHttpRequest();
-    request.open("GET", "/schedule/list", true);
-    request.onreadystatechange = function () {
-        if (request.readyState === 4) {
-            try {
-                var response = JSON.parse(request.responseText);
-                if (request.status === 200) {
-                    schedule = response.schedule;
-                    displaySchedule();
-                } else {
-                    alert(response.message);
-                }
-            } catch (exception) {
-                alert("Schedule list not available.");
-            }
-        }
-    };
-    request.send();
+    $.ajax({
+        url: "/schedule/list",
+        type: "GET"
+    }).done(function (data) {
+        schedule = data.schedule;
+        displaySchedule();
+    }).fail(function (message) {
+        alert("Schedule list not available");
+    });
 }
 
 function createSessionElement(session) {
@@ -61,23 +53,21 @@ function displaySchedule() {
 }
 
 function saveStar(sessionId, isStarred) {
-    var request = new XMLHttpRequest();
-    request.open("POST", "/schedule/star/" + sessionId, true);
-    
-    if (isStarred) {
-        request.onreadystatechange = function() {
-            if (request.readyState === 4 && request.status === 200) {
-                var response = JSON.parse(request.responseText);
-                if (response.starCount > 50) {
-                    alert("This session is very popular! Be sure to arrive early to get a seat.");
-                }
-            }
-        };
-    }
 
-    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    var data = "starred=" + isStarred;
-    request.send(data);
+    $.ajax({
+        url: "/schedule/star/" + sessionId,
+        type: "POST",
+        data: { starred: isStarred },
+        contentType: "application/x-www-form-urlencoded",
+        success: function (response) {
+            if (response.starCount > 50) {
+                alert("This session is very popular! Be sure to arrive early to get a seat.");
+            }
+        },
+        error: function (x, message) {
+            alert("Star system is down : " + message);
+        }
+    });
 }
 
 function handleListClick(event) {
