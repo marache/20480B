@@ -21,19 +21,56 @@ header.page-header p {
     font-style: italic;
 }
 
-/* TODO: header.page-header .register */
 header.page-header .register {
+    display: block;
+    height: 10rem;
+    width: 16rem;
+    right: 3.5rem;
+    top: 2rem;
+    padding-top: 6rem;
+    position: absolute;
 
+    font-size: 2.7rem;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 black;
+    color: white;
+
+    background: -ms-linear-gradient(#a80000, #740404);
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    -ms-transform: rotate(6deg);
 }
 
-/* TODO: header.page-header .register:hover */
 header.page-header .register:hover {
-
+     background: -ms-linear-gradient(#bc0101, #8c0909);
 }
 
-/* TODO: header.page-header .register:before */
 header.page-header .register:before {
+    display: block;
+    position: absolute;
+    content: "";
+    border: 3px dotted #740404;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    height: 16.8rem;
+    width: 16.8rem;
+    top: -.7rem;
+    right: -.7rem; 
+}
 
+header.page-header .register:after {
+    display: block;
+    position: absolute;
+    content: "";
+    border: 3px dashed #047404;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    height: 17.8rem;
+    width: 17.8rem;
+    top: -1.2rem;
+    right: -1.2rem; 
 }
 
 header.page-header .register .free {

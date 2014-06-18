@@ -15,11 +15,11 @@
     var venueSection = document.querySelector("section.venue");
 
     var distanceFromConference = function (coords) {
-        return Math.floor(conference.geometry.distanceInMiles(coords, conferenceLocation));
+        return Math.floor(conference.geometry.distanceInKm(coords, conferenceLocation));
     };
 
     var showDistanceMessage = function (distance) {
-        var message = "You are " + distance + " miles from the conference";
+        var message = "You are " + distance + " km from the conference";
         distanceElement.textContent = message;
     };
 
@@ -29,7 +29,7 @@
 
     var updateUIForPosition = function (position) {
         // TODO: Calculate the distance from the conference
-        // var distance = ... ;
+        var distance = distanceFromConference(position.coords);
         
         showDistanceMessage(distance);
         var isNearToConference = distance < maximumDistanceInMilesFromConferenceToShowVenue;
@@ -44,6 +44,7 @@
 
     // TODO: Get current position from the geolocation API.
     //       Call updateUIForPosition for success and error for failure.
+    navigator.geolocation.getCurrentPosition(updateUIForPosition, error);
 
 } ());
 // SIG // Begin signature block

@@ -1,49 +1,62 @@
 ﻿// TODO: Wrap this file's code in an immediately invoked function expression
+(function () {
 
-// TODO: Strict mode
+    // TODO: Strict mode
+    "use strict";
 
-var copyOwnProperties = function (from, to) {
-    for (var propertyName in from) {
-        if (from.hasOwnProperty(propertyName)) {
-            to[propertyName] = from[propertyName];
+    var copyOwnProperties = function (from, to) {
+        for (var propertyName in from) {
+            if (from.hasOwnProperty(propertyName)) {
+                to[propertyName] = from[propertyName];
+            }
         }
-    }
-};
+    };
 
-var inherit = function (additionalProperties) {
-    // `inherit` creates an factory object that is similar to a Class in C# and Java.
-    // The created factory object has a `create` method that creates instances.
-    // The factory object also serves as the prototype for created instances.
-    // So any properties added to the factory (via the additionalProperties parameter)
-    // will available to created instances.
-    // If the additionalProperties has a function named `initialize`, then this is
-    // called to initialize created instances.
-    
-    // TODO: Create a variable named `factory`, assign it a new object who's prototype is `this`.
-    
-    // TODO: Add a method called `create` to `factory`, that does the following
-    
-        // TODO: Define a variable named `instance` 
-        //       and assign it a new object that has `factory` as its prototype.
-    
-        // TODO: If `instance` has a function named "initialize",
-        //       then call `initialize`, passing any arguments passed to `create`.
-    
-        // TODO: return `instance`.
-    
+    var inherit = function (additionalProperties) {
+        // `inherit` creates an factory object that is similar to a Class in C# and Java.
+        // The created factory object has a `create` method that creates instances.
+        // The factory object also serves as the prototype for created instances.
+        // So any properties added to the factory (via the additionalProperties parameter)
+        // will available to created instances.
+        // If the additionalProperties has a function named `initialize`, then this is
+        // called to initialize created instances.
 
-    // TODO: Copy properties of `additionalProperties` onto `factory' (using copyOwnProperties).
-    
-    // TODO: Return the `factory` object.
-};
+        // TODO: Create a variable named `factory`, assign it a new object who's prototype is `this`.
+        var factory = Object.create(this);
 
-// TODO: Add the inherit function to the built-in `Object` object.
+        // TODO: Add a method called `create` to `factory`, that does the following
+        factory.create = function () {
+
+            // TODO: Define a variable named `instance` 
+            //       and assign it a new object that has `factory` as its prototype.
+            var instance = Object.create(factory);
+
+            // TODO: If `instance` has a function named "initialize",
+            //       then call `initialize`, passing any arguments passed to `create`.
+            if (typeof instance.initialize === "function") {
+                instance.initialize.apply(instance, arguments);
+            }
+
+            // TODO: return `instance`.
+            return instance;
+        };
+
+        // TODO: Copy properties of `additionalProperties` onto `factory' (using copyOwnProperties).
+        copyOwnProperties(additionalProperties, factory);
+
+        // TODO: Return the `factory` object.
+        return factory();
+    };
+
+    // TODO: Add the inherit function to the built-in `Object` object.
+    Object.inherit = inherit;
+}());
 // SIG // Begin signature block
 // SIG // MIIaVgYJKoZIhvcNAQcCoIIaRzCCGkMCAQExCzAJBgUr
 // SIG // DgMCGgUAMGcGCisGAQQBgjcCAQSgWTBXMDIGCisGAQQB
 // SIG // gjcCAR4wJAIBAQQQEODJBs441BGiowAQS9NQkAIBAAIB
-// SIG // AAIBAAIBAAIBADAhMAkGBSsOAwIaBQAEFA8Me/UhRF2s
-// SIG // +kTNlNbWndWey32koIIVJjCCBJkwggOBoAMCAQICEzMA
+// SIG // AAIBAAIBAAIBADAhMAkGBSsOAwIaBQAEFAzO6Fvs9oi6
+// SIG // fbLW4g3S+ooAfxHzoIIVJjCCBJkwggOBoAMCAQICEzMA
 // SIG // AACdHo0nrrjz2DgAAQAAAJ0wDQYJKoZIhvcNAQEFBQAw
 // SIG // eTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0
 // SIG // b24xEDAOBgNVBAcTB1JlZG1vbmQxHjAcBgNVBAoTFU1p
@@ -215,33 +228,33 @@ var inherit = function (additionalProperties) {
 // SIG // rrjz2DgAAQAAAJ0wCQYFKw4DAhoFAKCBvjAZBgkqhkiG
 // SIG // 9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
 // SIG // MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQU
-// SIG // bnItl+x46jOaq8e0caocD5svs6YwXgYKKwYBBAGCNwIB
+// SIG // /RrvLQMdZCyB5yHRNY06ud/pWEkwXgYKKwYBBAGCNwIB
 // SIG // DDFQME6gJoAkAE0AaQBjAHIAbwBzAG8AZgB0ACAATABl
 // SIG // AGEAcgBuAGkAbgBnoSSAImh0dHA6Ly93d3cubWljcm9z
 // SIG // b2Z0LmNvbS9sZWFybmluZyAwDQYJKoZIhvcNAQEBBQAE
-// SIG // ggEAUgoRxm7mnzosx2JAYPQ1sfR0KX5pHtB2eY8GGFep
-// SIG // C1m2SkQyrh3xIMY7pRdZDoU3ZcJ2JhIYKvStrOHe8Tm7
-// SIG // Z79y0pAdDF4J6D9qyeX9GDccKglcsRlivs9lcUMkAZS7
-// SIG // gKys4d/wu0SafYSXfrePAgs34ITzskQk5mnZktZSuQ/O
-// SIG // DbxBfnLewV7QlHuub0XekEHiKtP3buKfekAg/v4LBwmI
-// SIG // CPXy9tTGQ46778Hu9Y1tOcvsFlqMTSt6aLpU+EBPDJ3t
-// SIG // Q6u73qAzyEE6TtWlOzvLxd03mYqBpLWp30FGS8O3O5rS
-// SIG // 9AC0BPZidMEo/FLbziwUlT9Ikr92KYl+9+HsIaGCAh8w
+// SIG // ggEAa7J1PCRfWyt5yBTA9u2PjfLhO8Z9QEwkh0lVxAoC
+// SIG // KKBseJ5pEJsaPlyF0dElYNQrzhnh1t2YrkSIskBpYP7Q
+// SIG // grqFrd9MZFLSgTdfL/HWIK30HcSKnrdR7vYqr8X2fe0n
+// SIG // 1wNQxZFmjzo3g5gqg/Zq+OTIJLlPcFsdPL36piWPH8D5
+// SIG // 8BgsqQ3h7FIKJAm1+54tWn7H5/TPilfTIhyXEY1/1Vwt
+// SIG // L/BoewpzojjuaY/roCbiXZQ5x7EsA+AYC+Fsht5pC9CC
+// SIG // eASE7NiOMVKC8yzUUilVBpeM//kVgTXaQ7chjcBK/1En
+// SIG // Dig9KIRZpS/n54R5pG/dKtre8+lGl1pLWldOraGCAh8w
 // SIG // ggIbBgkqhkiG9w0BCQYxggIMMIICCAIBATCBhTB3MQsw
 // SIG // CQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQ
 // SIG // MA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9z
 // SIG // b2Z0IENvcnBvcmF0aW9uMSEwHwYDVQQDExhNaWNyb3Nv
 // SIG // ZnQgVGltZS1TdGFtcCBQQ0ECCmECkkoAAAAAACAwCQYF
 // SIG // Kw4DAhoFAKBdMBgGCSqGSIb3DQEJAzELBgkqhkiG9w0B
-// SIG // BwEwHAYJKoZIhvcNAQkFMQ8XDTEyMTExNDIzNTc0Nlow
-// SIG // IwYJKoZIhvcNAQkEMRYEFO0bRYh7Vls6QL9U7btmTJEt
-// SIG // /poXMA0GCSqGSIb3DQEBBQUABIIBAJbWyitpRvNriVIo
-// SIG // syPI/s3a0v8aqYxUkz3hmK5uRi5430xBRG12evNNIzYz
-// SIG // C3sw4hoNaERxQ7FYokVOD/ZQyBnOJ7mV8R1vG+Aa3FX2
-// SIG // q0zaszePcDdgCdWF0/I9uV2XHTfnmwKZEI8y0U2lt6Og
-// SIG // x4UJk1us09NlYWpN4ML1d2XGaoUhCu571Ark2BzC3A5e
-// SIG // m0cqgbIz5ZzT0IqkltqQTi6qFXMI/7FUsUnJaTxw49je
-// SIG // L5Qhmx+LFCAe/ELU7ZZMrWChd9p2U3byrsV9HQsZ/4nL
-// SIG // i0YufFB8BJgqo+umTyZY24T4V0uYgmNLUAjt9dpSIyd7
-// SIG // va5e/4eqY8zlRAW2ZRc=
+// SIG // BwEwHAYJKoZIhvcNAQkFMQ8XDTEyMTExNDIzNTc0M1ow
+// SIG // IwYJKoZIhvcNAQkEMRYEFPDbZQlmXQ5vrAD4baHDCK2j
+// SIG // lEB8MA0GCSqGSIb3DQEBBQUABIIBACNtiFOEnkKIE6I8
+// SIG // a28CfMz8kdACm/pl2tMGHG/HKDES5ktLELUThC+U06MS
+// SIG // TVtS2iKzsq2Wz7HOKMuwSTaEeV2POcC1J6Y+gVfXIsHi
+// SIG // 7dgs77CdzJzu3LMD5CyePPkSxa3Ekq12/WWqiFzempih
+// SIG // F4MuZQHBb/HeT4V4M4EdOz+2RoNKJ7/js19fO8C201hB
+// SIG // rM2b6YGAYO9J8JF4xstzWjv9H5k/kgvLBBI4y2YSzbbk
+// SIG // HeBdXZASVV/PtNqxcsy+AxVwW3mxfpAcwh9ffrSZm3Fg
+// SIG // TfU9/fB16azci36gYZ36hCFA3N5Y/dLpJ+e30UkUCvlh
+// SIG // aJyKq+Uskujd1KJGA48=
 // SIG // End signature block
