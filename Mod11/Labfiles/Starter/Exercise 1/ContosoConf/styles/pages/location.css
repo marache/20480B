@@ -20,3 +20,7 @@
 .room {
     cursor: pointer;
 }
+
+.room rect:hover {
+    fill: #b1f8b0;
+}

@@ -12,10 +12,13 @@
     };
 
     // TODO: Get the room elements in the svg element.
-    // var rooms = ;
+    var rooms = document.querySelectorAll(".room");
 
     // TODO: Add a click event listener for each room element.
     //       Call the showRoomInfo function, passing the clicked element's id property.
+    for (i = 0; i < rooms.length; ++i) {
+        rooms[i].addEventListener("click", function () { showRoomInfo(this.id); }, false);
+    }
 
 } ());
 // SIG // Begin signature block
