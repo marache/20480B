@@ -1,0 +1,20 @@
+﻿nav.page-nav {
+    display: none;
+}
+
+header.page-header {
+    display: none;
+}
+
+footer.page-footer {
+    display: none;
+}
+
+.container {
+    max-width: none;
+    padding: 0;
+}
+
+.about > article > section {
+    column-count: 1;
+}
