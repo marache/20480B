@@ -56,6 +56,8 @@
             // TODO: Check if message has a `questions` property, before calling handleQuestionsMessage
             if (message.questions) {
                 this.handleQuestionsMessage(message);
+            } else if (message.remove) {
+                this.handleRemoveMessage(message);
             }
         },
 
@@ -82,7 +84,7 @@
 
         displayQuestion: function (question) {
             var item = this.createQuestionItem(question);
-            //item.appendChild(this.createReportLink());
+            item.appendChild(this.createReportLink());
             this.questionListElement.appendChild(item);
         },
 
@@ -118,6 +120,9 @@
 
         reportQuestion: function (questionId) {
             // TODO: Send socket message { report: questionId }
+            var message = { report: questionId };
+            var json = JSON.stringify(message);
+            this.socket.send(json);
         }
     });
 

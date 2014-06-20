@@ -37,10 +37,13 @@
 
         askQuestion: function (text) {
             // TODO: Create a message object with the format { ask: text }
+            var message = { ask: text };
             
             // TODO: Convert the message object into a JSON string
-            
+            var json = JSON.stringify(message);
+
             // TODO: Send the message to the socket
+            this.socket.send(json);
 
             // Clear the input ready for another question.
             this.questionInput.value = "";

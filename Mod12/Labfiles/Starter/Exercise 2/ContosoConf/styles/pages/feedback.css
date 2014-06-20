@@ -88,8 +88,8 @@
 */
 @keyframes send {
     0%  { transform: scale(1); }
-    50% { transform:  scale(.8); }
-    100% { transform: translate(0, -1000px); }
+    50% { transform:  scale(.2); }
+    100% { transform: translate(3000px, 0px); scale(.02); }
 }
 
 .sending {

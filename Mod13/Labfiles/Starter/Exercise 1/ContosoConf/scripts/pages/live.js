@@ -12,6 +12,7 @@
         initializeSocket: function (socket) {
             this.socket = socket;
             // TODO: Assign a callback to handle messages from the socket.
+            this.socket.onmessage = this.handleSocketMessage.bind(this);
         },
 
         initializeUI: function (sectionElement) {
@@ -47,10 +48,12 @@
 
         handleSocketMessage: function (event) {
             // TODO: Parse the event data into message object.
-            // var message = ... ;
+            var message = JSON.parse(event.data);
 
             // TODO: Check if message has a `questions` property, before calling handleQuestionsMessage
-            this.handleQuestionsMessage(message);
+            if (message.questions) {
+                this.handleQuestionsMessage(message);
+            }
         },
 
         handleQuestionsMessage: function (message) {
@@ -61,6 +64,9 @@
             //   ] }
             
             // TODO: Display each question in the page, using the displayQuestion function.
+            if (message.questions) {
+                message.questions.forEach(this.displayQuestion, this);
+            }
         },
 
         handleRemoveMessage: function (message) {
@@ -116,7 +122,7 @@
 
 
     // TODO: Create a web socket connection to ws://localhost:55981/live/socket.ashx
-    // var socket = 
+    var socket = new WebSocket("ws://localhost:55981/live/socket.ashx");
     LivePage.create(
         socket,
         document.querySelector("section.live")
