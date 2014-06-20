@@ -47,6 +47,7 @@ header.page-header .register {
     background: linear-gradient(#a80000, #740404);
 
     /* TODO: Transition the transform property over 1 second */
+    transition: transform 1s;
 }
 
 header.page-header .register:hover {
@@ -55,8 +56,10 @@ header.page-header .register:hover {
     background: linear-gradient(#bc0101, #8c0909);
 
     /* TODO: rotate to 16 degrees and scale by 1.1 */
+    transform: rotate(16deg) scale(1.1);
     
     /* TODO: Transition the transform property over 1 second */
+    transition: transform 1s;
 }
 
 header.page-header .register:before /* Creates dotted border */ {

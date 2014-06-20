@@ -10,6 +10,7 @@
     var formSubmitting = function (event) {
         event.preventDefault();
         // TODO: Trigger the animation by adding the "sending" CSS class to the form
+        form.classList.add("sending");
     };
 
     var animationEnded = function () {
@@ -21,6 +22,7 @@
 
     // TODO: Add listener for the animationend event,
     //       calling the animationEnded function.
+    form.addEventListener("animationend", animationEnded, false);
 
     var StarRatingView = conference.StarRatingView;
 
